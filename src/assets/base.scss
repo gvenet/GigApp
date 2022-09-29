@@ -1,0 +1,214 @@
+:root {
+   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
+
+   --primary-1: #3498db;
+   --primary-2: #2980b9;
+   --danger-1: #e74c3c;
+   --danger-2: #c0392b;
+   --success-1: #2ecc71;
+   --success-2: #27ae60;
+
+   --gray-1: #f6f6f6;
+   --gray-2: #ddd;
+   --gray-3: #5f6368;
+   --gray-4: #34495e;
+
+   --border: 1px solid var(--gray-3);
+   --border-radius: 4px;
+
+   --font-family: 'Roboto', sans-serif;
+
+   --background-color-1: #202124;
+   
+   
+   --text-primary-color: #e7e9ec;
+   --text-secondary-color: #9aa0a6;
+   
+   --hover-text-color: #81a9e7;
+   --hover-background-color-1: #384357;
+   --hover-background-color-2: #252729;
+
+   --font-size: 15px;
+
+   --button-radius: 15px;
+}
+
+//button
+
+.btn {
+   background-color: var(--background-color-1);
+   padding: 5px 15px;
+   color: var(--text-secondary-color);
+   border: none;
+}
+
+.btn-header {
+   height: 49px;
+   &:hover {
+      color: var(--text-primary-color);
+      background-color: var(--hover-background-color-2);
+   }
+}
+
+.btn-primary {
+   border-radius: var(--button-radius);
+   border: var(--border);
+   &:hover {
+      color: var(--text-primary-color);
+      background-color: var(--hover-background-color-1);
+   }
+}
+
+//reset 
+
+* {
+   box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4 {
+   margin: 0;
+}
+
+ul {
+   list-style: none;
+   padding: 0;
+}
+
+img {
+   max-width: 100%;
+}
+
+a {
+   color: var(--text-color);
+   text-decoration: none;
+}
+
+body {
+   min-height: 100vh;
+   padding: 0;
+   margin: 0;
+   font-size: var(--font-size);
+   font-family: var(--font-family);
+   font-weight: 100;
+   color: var(--text-primary-color);
+   background-color: var(--background-color-1);
+}
+
+//flex
+
+.d-flex {
+   display: flex;
+}
+
+.row {
+   flex-direction: row;
+}
+
+.column {
+   flex-direction: column;
+}
+
+.justify-center {
+   justify-content: center;
+}
+
+.justify-space-around {
+   justify-content: space-around;
+}
+
+.justify-space-between {
+   justify-content: space-between;
+}
+
+.justify-start {
+   justify-content: flex-start;
+}
+
+.align-center {
+   align-items: center;
+}
+
+.align-start {
+   align-items: flex-start;
+}
+
+.flex-fill {
+   flex: 1 1 auto;
+}
+
+//padding
+
+.p-10 {
+   padding: 10px;
+}
+
+.p-20 {
+   padding: 20px;
+}
+
+.p-30 {
+   padding: 30px;
+}
+
+//padding-right
+
+.pl-10 {
+   padding-left: 10px;
+}
+
+.pl-20 {
+   padding-left: 20px;
+}
+
+.pl-30 {
+   padding-left: 30px;
+}
+
+//padding-right
+
+.pr-10 {
+   padding-right: 10px;
+}
+
+.pr-20 {
+   padding-right: 20px;
+}
+
+.pr-30 {
+   padding-right: 30px;
+}
+
+//margin
+
+.m-5 {
+   margin: 5px;
+}
+
+.m-10 {
+   margin: 10px;
+}
+
+.m-20 {
+   margin: 20px;
+}
+
+.m-30 {
+   margin: 30px;
+}
+
+//margin right
+
+.mr-10 {
+   margin-right: 10px;
+}
+
+.mr-20 {
+   margin-right: 20px;
+}
+
+.mr-30 {
+   margin-right: 30px;
+}
