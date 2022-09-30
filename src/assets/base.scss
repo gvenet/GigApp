@@ -1,6 +1,4 @@
 :root {
-   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
-
    --primary-1: #3498db;
    --primary-2: #2980b9;
    --danger-1: #e74c3c;
@@ -17,9 +15,9 @@
    --border-radius: 4px;
 
    --font-family: 'Roboto', sans-serif;
+   --font-size: 15px;
 
    --background-color-1: #202124;
-   
    
    --text-primary-color: #e7e9ec;
    --text-secondary-color: #9aa0a6;
@@ -28,7 +26,6 @@
    --hover-background-color-1: #384357;
    --hover-background-color-2: #252729;
 
-   --font-size: 15px;
 
    --button-radius: 15px;
 }
@@ -43,6 +40,7 @@
 }
 
 .btn-header {
+   @extend .btn;
    height: 49px;
    &:hover {
       color: var(--text-primary-color);
@@ -51,12 +49,24 @@
 }
 
 .btn-primary {
+   @extend .btn;
    border-radius: var(--button-radius);
    border: var(--border);
    &:hover {
       color: var(--text-primary-color);
       background-color: var(--hover-background-color-1);
    }
+}
+
+.btn-shop-product {
+   // @extend .btn-primary, .d-flex, .align-center, .justify-center;
+   &:hover {
+      color: var(--text-primary-color);
+      background-color: var(--hover-background-color-1);
+   }
+   height: 20px;
+   width: 20px;
+   
 }
 
 //reset 
@@ -96,6 +106,8 @@ body {
    color: var(--text-primary-color);
    background-color: var(--background-color-1);
 }
+
+
 
 //flex
 
@@ -201,6 +213,10 @@ body {
 
 //margin right
 
+.mr-5 {
+   margin-right: 5px;
+}
+
 .mr-10 {
    margin-right: 10px;
 }
@@ -212,3 +228,22 @@ body {
 .mr-30 {
    margin-right: 30px;
 }
+
+//margin bottom
+
+.mb-5 {
+   margin-bottom: 5px;
+}
+
+.mb-10 {
+   margin-bottom: 10px;
+}
+
+.mb-20 {
+   margin-bottom: 20px;
+}
+
+.mb-30 {
+   margin-bottom: 30px;
+}
+

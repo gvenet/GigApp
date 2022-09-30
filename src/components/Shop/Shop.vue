@@ -8,7 +8,7 @@
          <h5 class="m-10">FILTER5</h5>
       </div>
       <div class="shop-list p-30 d-flex justify-start align-center">
-         <ShopProduct v-for="n in 27" />
+         <ShopProduct v-for="n in 1" />
       </div>
    </div>
 
