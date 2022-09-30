@@ -23,7 +23,7 @@
    border-bottom: var(--border);
 }
 .logo {
-   height: 30px;
+   height: 25px;
 }
 
 .app-logo {

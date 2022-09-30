@@ -8,22 +8,18 @@
          <h5 class="m-10">FILTER5</h5>
       </div>
       <div class="shop-list p-30 d-flex justify-start align-center">
-         <div class="product p-10 m-5" v-for="n of 30">
-            shop-product
-         </div>
+         <ShopProduct v-for="n in 27" />
       </div>
    </div>
 
 </template>
 
 <script setup lang="ts">
+import ShopProduct from "./ShopProduct.vue";
 
 </script>
 
 <style scoped lang="scss">
-.container {
-   
-}
 
 .filter {
    height: 50px;
@@ -35,10 +31,5 @@
    flex-wrap: wrap;
 }
 
-.product {
-   width: 150px;
-   height: 150px;
-   border: var(--border);
-   border-radius: var(--border-radius);
-}
+
 </style>
