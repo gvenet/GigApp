@@ -30,18 +30,42 @@
    --button-radius: 15px;
 }
 
+//input
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input:focus {
+   outline:none;
+}
+
+input {
+   background-color: var(--background-color-1);
+   border:none;
+   color: var(--text-primary-color);
+   font-family: var(--font-family);
+   width: 30px;
+   font-size: 18px;
+   font-weight: 400;
+}
+
 //button
 
 .btn {
    background-color: var(--background-color-1);
-   padding: 5px 15px;
    color: var(--text-secondary-color);
-   border: none;
+   border: var(--border);
+   border-radius: var(--button-radius);
 }
 
 .btn-header {
    @extend .btn;
    height: 49px;
+   border: none;
+   border-radius: none;
    &:hover {
       color: var(--text-primary-color);
       background-color: var(--hover-background-color-2);
@@ -50,11 +74,10 @@
 
 .btn-primary {
    @extend .btn;
-   border-radius: var(--button-radius);
-   border: var(--border);
    &:hover {
-      color: var(--text-primary-color);
+      color: var(--hover-text-color);
       background-color: var(--hover-background-color-1);
+      border-color: var(--hover-text-color);
    }
 }
 
@@ -63,6 +86,7 @@
    &:hover {
       color: var(--text-primary-color);
       background-color: var(--hover-background-color-1);
+      border-color: var(--text-primary-color);
    }
    height: 20px;
    width: 20px;
@@ -78,7 +102,8 @@
 h1,
 h2,
 h3,
-h4 {
+h4,
+h5 {
    margin: 0;
 }
 
@@ -149,6 +174,10 @@ body {
 
 .flex-fill {
    flex: 1 1 auto;
+}
+
+.d-flex-center {
+   @extend .d-flex, .justify-center,.align-center;
 }
 
 //padding
@@ -245,5 +274,16 @@ body {
 
 .mb-30 {
    margin-bottom: 30px;
+}
+
+//icons
+
+.material-icons{
+   color: var(--text-primary-color);
+}
+
+.material-icons:hover{
+   color: var( --hover-text-color);
+   cursor:pointer; 
 }
 

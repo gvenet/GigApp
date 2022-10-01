@@ -1,7 +1,7 @@
 <template>
    <div class="app-container">
       <TheHeader class="header" />
-      <Shop class="shop" />
+      <Shop class="shop" :pokemons="pokemons" />
       <Cart class="cart" />
       <TheFooter class="footer" />
    </div>
@@ -13,6 +13,11 @@ import TheHeader from "./components/Header.vue";
 import TheFooter from "./components/Footer.vue";
 import Cart from "./components/Cart/Cart.vue";
 import Shop from "./components/Shop/Shop.vue";
+import { reactive } from "vue";
+import type { PokemonInterface } from "./interfaces/pokemon.interface";
+import pokemonsData from "./data/pokemons"
+
+const pokemons = reactive<PokemonInterface[]>(pokemonsData);
 
 </script>
 
@@ -38,7 +43,6 @@ import Shop from "./components/Shop/Shop.vue";
 
 .cart {
    grid-area: cart;
-   min-width: 300px;
 }
 
 .footer {
