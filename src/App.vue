@@ -2,7 +2,7 @@
    <div class="app-container">
       <TheHeader class="header" />
       <Shop class="shop" :pokemons="state" />
-      <Cart class="cart" />
+      <!-- <Cart class="cart" /> -->
       <TheFooter class="footer" />
    </div>
 
@@ -28,9 +28,11 @@ const state = reactive<PokemonInterface[]>(pokemonsData);
 .app-container {
    height: 100vh;
    display: grid;
-   grid-template-columns: 80% 20%;
+   // grid-template-columns: 80% 20%;
+   grid-template-columns: 100%;
    grid-template-rows: 50px auto 50px;
-   grid-template-areas: "header header" "shop cart" "footer footer";
+   // grid-template-areas: "header header" "shop cart" "footer footer";
+   grid-template-areas: "header" "shop" "footer";
 }
 
 .header {

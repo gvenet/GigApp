@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import test from "../assets/logo.svg"
+import test from "../assets/ElementTypeLogo/Dark.svg"
 </script>
 
 <style scoped lang="scss">

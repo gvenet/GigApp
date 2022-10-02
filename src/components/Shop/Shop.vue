@@ -56,6 +56,7 @@ function elementFound(pokemonTypes: [(string | undefined)?, (string | undefined)
 }
 
 .shop-list>div {
+   // flex: 1 1 auto;
    flex-grow: 1;
 }
 
