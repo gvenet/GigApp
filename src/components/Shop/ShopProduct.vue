@@ -2,13 +2,6 @@
    <div class="container p-10 m-5 d-flex justify-space-between">
       <div>
          <h2 class="mb-10">{{pokemon.name.french}}</h2>
-
-         <div class="mb-10 d-flex-center justify-start">
-            <div class="d-flex-center mr-10">
-               <h4 class="mr-10">Type:</h4>
-               <h4 class="mr-10" v-for="typ in pokemon.type">{{typ}}</h4>
-            </div>
-         </div>
          <ProductElement name="HP" :def="pokemon.base.HP" />
          <ProductElement name="Attack" :def="pokemon.base.Attack" />
          <ProductElement name="Defense" :def="pokemon.base.Defense" />
@@ -21,7 +14,18 @@
             <button class="btn-primary material-icons" @click="">add</button>
          </div>
       </div>
-      <img :src="pokemon.image.thumbnail">
+      <div>
+         <div class="d-flex-center justify-end mb-20">
+            <div class="d-flex-center">
+               <h4 class="ml-10" v-for="typ in pokemon.type">
+                  <img class="element-logo" :src="logos[typ]" alt="">
+               </h4>
+            </div>
+         </div>
+         <div class="d-flex-center">
+            <img class="pokemon-img" :src="pokemon.image.thumbnail">
+         </div>
+      </div>
    </div>
 
 </template>
@@ -29,24 +33,37 @@
 <script setup lang="ts">
 import { ref, reactive } from "vue";
 import ProductElement from "./ProductElement.vue";
-import type { PokemonInterface } from "../../interfaces/pokemon.interface"
+import type { PokemonInterface } from "../../interfaces/pokemon.interface";
 
-const pokemon = reactive<{pokemon: PokemonInterface}>()
+defineProps < { pokemon: PokemonInterface, logos: any}>()
+const typ = ref('');
 
 </script>
 
 <style scoped lang="scss">
 .container {
+   width: 400px;
    border: var(--border);
    border-radius: var(--border-radius);
+   background-color: var(--hover-background-color-2);
 }
 
-img {
+.pokemon-img {
    width: 150px;
    height: 150px;
+   &:hover {
+      width: 149px;
+      height: 149px;
+   }
+
 }
 
 .buttons {
    width: 100%;
+}
+
+.element-logo{
+   width: 30px;
+   height: 30px;
 }
 </style>

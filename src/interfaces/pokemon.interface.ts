@@ -1,19 +1,19 @@
 export interface PokemonInterface {
-  id?: number;
-  name?: {
-    english?: string;
-    japanese?: string;
-    chinese?: string;
-    french?: string;
+  id: number;
+  name: {
+    english: string;
+    japanese: string;
+    chinese: string;
+    french: string;
   };
   type?: [string?, string?];
-  base?: {
-    HP?: number;
-    Attack?: number;
-    Defense?: number;
-    SpAttack?: number;
-    SpDefense?: number;
-    Speed?: number;
+  base: {
+    HP: number;
+    Attack: number;
+    Defense: number;
+    SpAttack: number;
+    SpDefense: number;
+    Speed: number;
   };
   species?: string;
   description?: string;
@@ -37,9 +37,9 @@ export interface PokemonInterface {
     ability?: [[string?, string?]?, [string?, string?]?, [string?, string?]?];
     gender?: string;
   };
-  image?: {
+  image: {
     sprite?: string;
-    thumbnail?: string;
+    thumbnail: string;
     hires?: string;
   };
 }

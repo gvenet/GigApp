@@ -1,7 +1,7 @@
 <template>
    <div class="app-container">
       <TheHeader class="header" />
-      <Shop class="shop" :pokemons="pokemons" />
+      <Shop class="shop" :pokemons="state" />
       <Cart class="cart" />
       <TheFooter class="footer" />
    </div>
@@ -15,9 +15,9 @@ import Cart from "./components/Cart/Cart.vue";
 import Shop from "./components/Shop/Shop.vue";
 import { reactive } from "vue";
 import type { PokemonInterface } from "./interfaces/pokemon.interface";
-import pokemonsData from "./data/pokemons"
+import pokemonsData from "./data/pokemons.json"
 
-const pokemons = reactive<PokemonInterface[]>(pokemonsData);
+const state = reactive<PokemonInterface[]>(pokemonsData);
 
 </script>
 
