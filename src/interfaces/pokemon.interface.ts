@@ -40,6 +40,6 @@ export interface PokemonInterface {
   image: {
     sprite?: string;
     thumbnail: string;
-    hires?: string;
+    hires: string;
   };
 }

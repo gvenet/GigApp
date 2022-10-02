@@ -18,12 +18,13 @@
          <div class="d-flex-center justify-end mb-20">
             <div class="d-flex-center">
                <h4 class="ml-10" v-for="typ in pokemon.type">
-                  <img class="element-logo" :src="logos[typ]" alt="">
+                  <img class="element-logo" :src="logos[typ as keyof typeof logos]" alt="">
                </h4>
             </div>
          </div>
-         <div class="d-flex-center">
+         <div class="pokemon-img-container d-flex-center" @click="togglePopup()">
             <img class="pokemon-img" :src="pokemon.image.thumbnail">
+            <Popup v-if="popupTrigger" :fullImg="pokemon.image.hires" />
          </div>
       </div>
    </div>
@@ -34,35 +35,43 @@
 import { ref, reactive } from "vue";
 import ProductElement from "./ProductElement.vue";
 import type { PokemonInterface } from "../../interfaces/pokemon.interface";
+import Popup from "../Utils/Popup.vue";
 
-defineProps < { pokemon: PokemonInterface, logos: any}>()
-const typ = ref('');
+defineProps<{ pokemon: PokemonInterface, logos: any }>()
+
+const popupTrigger = ref(false);
+
+function togglePopup() {
+   console.log("TEST : " + popupTrigger.value)
+   popupTrigger.value = !popupTrigger.value;
+}
 
 </script>
 
 <style scoped lang="scss">
 .container {
-   width: 400px;
+   flex-basis: 100%;
+   min-width: 350px;
    border: var(--border);
    border-radius: var(--border-radius);
    background-color: var(--hover-background-color-2);
 }
 
 .pokemon-img {
-   width: 150px;
-   height: 150px;
+   width: 95%;
+
    &:hover {
-      width: 149px;
-      height: 149px;
+      width: 100%;
    }
 
 }
 
-.buttons {
-   width: 100%;
+.pokemon-img-container {
+   width: 150px;
+   height: 150px;
 }
 
-.element-logo{
+.element-logo {
    width: 30px;
    height: 30px;
 }

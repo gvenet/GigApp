@@ -17,7 +17,7 @@ import Steel from "../assets/ElementTypeLogo/Steel.svg";
 import Water from "../assets/ElementTypeLogo/Water.svg";
 import { ref } from "vue";
 
-const logoType = ref({
+const logoType = {
   Bug,
   Dragon,
   Electric,
@@ -35,6 +35,6 @@ const logoType = ref({
   Rock,
   Steel,
   Water,
-});
+};
 
 export default logoType

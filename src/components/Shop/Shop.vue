@@ -1,23 +1,12 @@
 <template>
-   <div class="container">
-      <div class="filter d-flex align-center justify-space-around p-30">
-         <div class="d-flex-center" style="height: 100%">
-            <div v-for="(elemType,i) in elemTypes" :key="i">
-               <input class="elem-filter" type="checkbox" :id=elemType :value=elemType v-model="checkedElements">
-               <label :for=elemType>
-                  <div class="img-elem-filter-container d-flex-center">
-                     <img class="img-elem-filter" :src="logoType[elemType]" alt="">
-                  </div>
-               </label>
-            </div>
-         </div>
-         <h5 class="m-10">FILTER1</h5>
-         <h5 class="m-10">FILTER2</h5>
-      </div>
-      <div class="shop-list p-30 d-flex-center justify-start">
-         <div v-for="pokemon in pokemons" :key="pokemon.id">
-            <div v-if="elementFound(pokemon.type)">
-               <ShopProduct :pokemon="pokemon" :logos="logoType" />
+   <div class="container d-flex-center column justify-start">
+      <div class="container-shop-list d-flex-center column">
+         <Filters class="filter " @export-checked="defCheckedElements" :logoType="logoTypeBind" />
+         <div class="shop-list d-flex-center">
+            <div v-for="pokemon in pokemons" :key="pokemon.id">
+               <div v-if="elementFound(pokemon.type)">
+                  <ShopProduct :pokemon="pokemon" :logos="logoTypeBind" />
+               </div>
             </div>
          </div>
       </div>
@@ -26,39 +15,27 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed } from 'vue';
+import { ref, reactive, computed, type Ref } from 'vue';
 import type { PokemonInterface } from "@/interfaces/pokemon.interface";
+import type { LogoTypeInterface } from '@/interfaces/logoType.interface'
 import ShopProduct from "./ShopProduct.vue";
-import logoType from "../../data/Elements"
+import logoTypeImport from "@/data/Elements"
+import Filters from "./Filters.vue"
 
 defineProps<{
    pokemons: PokemonInterface[]
 }>();
 
-const checkedElements = ref([])
+const logoTypeBind: LogoTypeInterface = logoTypeImport;
+const checkedElements: Ref<string[]> = ref([])
 
-const elemTypes = ref(["Bug", "Dragon", "Electric", "Fairy", "Fighting", "Fire", "Flying", "Ghost", "Grass", "Ground", "Ice", "Normal", "Poison", "Psychic", "Rock", "Steel", "Water"]);
-
-const filterHover = ref(false);
-const filterClick = ref(false);
-
-const filterClass = reactive({
-   width: '28px',
-   height: '28px',
-})
-
-function testEnterLog() {
-   filterHover.value = !filterHover.value;
-   console.log(filterHover.value);
+function defCheckedElements(value: string[]) {
+   checkedElements.value = value;
 }
 
-function testLeaveLog() {
-   filterHover.value = !filterHover.value;
-   console.log(filterHover.value);
-}
-function elementFound(pokemonTypes: string[]): boolean {
+function elementFound(pokemonTypes: [(string | undefined)?, (string | undefined)?] | undefined): boolean {
    for (let checkedElement of checkedElements.value) {
-      if (!pokemonTypes.includes(checkedElement)) {
+      if (!pokemonTypes?.includes(checkedElement)) {
          return false;
       }
    }
@@ -70,40 +47,22 @@ function elementFound(pokemonTypes: string[]): boolean {
 
 
 <style scoped lang="scss">
-.filter {
-   height: 50px;
-   border-bottom: var(--border);
+.container-shop-list {
+   max-width: 1500px;
 }
 
 .shop-list {
    flex-wrap: wrap;
 }
 
-.elem-filter {
-   display: none;
-   height: 100%;
+.shop-list>div {
+   flex-grow: 1;
 }
 
-.elem-filter:checked+label>div {
-   >img {
-      animation: rotating 2s linear infinite;
-      width: 35px;
-      height: 35px;
-   }
-}
-
-.img-elem-filter-container {
-   width: 35px;
-   height: 35px;
-}
-
-.img-elem-filter {
-   width: 20px;
-   height: 20px;
-
-   &:hover {
-      width: 35px;
-      height: 35px;
-   }
+.filter {
+   height: 50px;
+   border: var(--border);
+   border-radius: 50px;
+   width: calc(100% - 10px);
 }
 </style>
