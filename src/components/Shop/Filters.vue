@@ -5,14 +5,14 @@
 			<input class="input-search-filter" type="text">
 		</div>
 		<div class="d-flex-center">
-			<div v-for="(elemType,i) in elemTypes" :key="i">
+			<template v-for="(elemType,i) in elemTypes" :key="i">
 				<input class="elem-filter" type="checkbox" :id=elemType :value=elemType v-model="checkedElements">
 				<label :for=elemType>
 					<div class="img-elem-filter-container d-flex-center">
 						<img class="img-elem-filter" :src="logoType[elemType as keyof typeof logoType]" alt="">
 					</div>
 				</label>
-			</div>
+			</template>
 		</div>
 		<h5 class="m-10">FILTER1</h5>
 		<h5 class="m-10">FILTER2</h5>

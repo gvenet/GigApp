@@ -17,9 +17,9 @@
       <div>
          <div class="d-flex-center justify-end mb-20">
             <div class="d-flex-center">
-               <h4 class="ml-10" v-for="typ in pokemon.type">
-                  <img class="element-logo" :src="logos[typ as keyof typeof logos]" alt="">
-               </h4>
+               <template v-for="typ in pokemon.type">
+                  <img class="element-logo ml-10" :src="logos[typ as keyof typeof logos]" alt="">
+               </template>
             </div>
          </div>
          <div class="pokemon-img-container d-flex-center" @click="togglePopup()">

@@ -2,12 +2,12 @@
    <div class="container d-flex-center column justify-start">
       <div class="container-shop-list d-flex-center column">
          <Filters class="filter " @export-checked="defCheckedElements" :logoType="logoTypeBind" />
-         <div class="shop-list d-flex-center">
-            <div v-for="pokemon in pokemons" :key="pokemon.id">
-               <div v-if="elementFound(pokemon.type)">
+         <div class="shop-list d-flex">
+            <template  v-for="pokemon in pokemons" :key="pokemon.id">
+               <div class="flex-fill" v-if="elementFound(pokemon.type)">
                   <ShopProduct :pokemon="pokemon" :logos="logoTypeBind" />
                </div>
-            </div>
+            </template>
          </div>
       </div>
    </div>
@@ -53,11 +53,6 @@ function elementFound(pokemonTypes: [(string | undefined)?, (string | undefined)
 
 .shop-list {
    flex-wrap: wrap;
-}
-
-.shop-list>div {
-   // flex: 1 1 auto;
-   flex-grow: 1;
 }
 
 .filter {
