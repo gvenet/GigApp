@@ -17,6 +17,8 @@ import { reactive } from "vue";
 import type { PokemonInterface } from "./interfaces/pokemon.interface";
 import pokemonsData from "./data/pokemons.json"
 
+
+
 const state = reactive<PokemonInterface[]>(pokemonsData);
 
 </script>
