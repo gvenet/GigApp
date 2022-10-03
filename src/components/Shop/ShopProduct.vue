@@ -9,9 +9,9 @@
          <ProductElement name="SP. Defense" :def="pokemon.base.SpDefense" />
          <ProductElement name="Speed" :def="pokemon.base.SpDefense" />
          <div class="d-flex-center">
-            <h3 class="mr-10">add to cart:</h3>
+            <!-- <h3 class="mr-10">add to cart:</h3>
             <button class="btn-primary material-icons mr-5" @click="">remove</button>
-            <button class="btn-primary material-icons" @click="">add</button>
+            <button class="btn-primary material-icons" @click="">add</button> -->
          </div>
       </div>
       <div>
@@ -62,6 +62,7 @@ function togglePopup() {
 
    &:hover {
       width: 100%;
+      cursor: pointer;
    }
 
 }

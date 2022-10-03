@@ -2,7 +2,8 @@
    <div class="d-flex-center justify-space-between m-20">
       <div class="search-filter d-flex-center justify-start ml-10">
          <h5 class="material-icons">search</h5>
-         <input class="input-search-filter ml-10" type="text" placeholder="Search Pokémon">
+         <input class="input-search-filter ml-10" type="text" placeholder="Search Pokémon" maxlength="16"
+            v-model="searchedPokemon">
       </div>
       <div class="elem-filter-container d-flex-center flex-fill">
          <template v-for="(elemType,i) in elemTypes" :key="i">
@@ -36,13 +37,15 @@ const props = defineProps<{
 
 const emit = defineEmits<{
    (e: 'exportChecked', value: string[]): void,
+   (e: 'searchedPokemon', value: string): void,
 }>();
 
 onUpdated(() => emit('exportChecked', checkedElements.value))
+onUpdated(() => emit('searchedPokemon', searchedPokemon.value))
 
 const checkedElements = ref([])
 const elemTypes = ref(["Bug", "Dragon", "Electric", "Fairy", "Fighting", "Fire", "Flying", "Ghost", "Grass", "Ground", "Ice", "Normal", "Poison", "Psychic", "Rock", "Steel", "Water"]);
-
+const searchedPokemon = ref('');
 
 </script>
 
@@ -81,7 +84,7 @@ const elemTypes = ref(["Bug", "Dragon", "Electric", "Fairy", "Fighting", "Fire",
 
 .input-search-filter {
    font-size: var(--font-size);
-   width: 200px;
+   width: 150px;
 
    &::-webkit-input-placeholder {
       color: var(--text-primary-color);
@@ -113,6 +116,7 @@ const elemTypes = ref(["Bug", "Dragon", "Electric", "Fairy", "Fighting", "Fire",
 
 .stats-filter {
    height: 40px;
+
    &:hover {
       color: var(--hover-text-color);
       background-color: var(--hover-background-color-2);
