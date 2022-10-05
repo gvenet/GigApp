@@ -15,11 +15,13 @@
             </label>
          </template>
       </div>
-      <div class="stats-filter-container d-flex-center justify-start flex-fill">
-         <div class="stats-filter d-flex-center pl-10">
+      <div class="stats-filter-container d-flex-center align-center justify-start flex-fill">
+         <Dropdown class="ml-10" />
+
+         <!-- <div class="stats-filter d-flex-center pl-10">
             <div>Stats</div>
             <div class="material-icons">arrow_drop_down</div>
-         </div>
+         </div> -->
       </div>
       <div class="reset-filter d-flex-center mr-10 pl-10">
          <div class="material-icons">refresh</div>
@@ -30,6 +32,7 @@
 <script setup lang="ts">
 import { onUpdated, ref } from 'vue';
 import type { LogoTypeInterface } from '../../interfaces/logoType.interface'
+import Dropdown from '../Utils/Dropdown.vue'
 
 const props = defineProps<{
    logoType: LogoTypeInterface,
