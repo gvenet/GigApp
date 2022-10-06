@@ -1,7 +1,7 @@
 <template>
   <div class="dropdown">
     <div class="dropdown-title d-flex-center mb-5 mt-5" :class="{clicked: toggle}" @click="toggle = !toggle;">
-      <span>Stats</span>
+      <span>Statistiques</span>
       <div v-if="toggle" class="material-icons">arrow_drop_up</div>
       <div v-else class="material-icons">arrow_drop_down</div>
     </div>
