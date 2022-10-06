@@ -16,7 +16,7 @@
          </template>
       </div>
       <div class="stats-filter-container d-flex-center align-center justify-start flex-fill">
-         <Dropdown class="ml-10" />
+         <Dropdown class="ml-10" @filter-emits="emit('filter-emits', $event)"/>
       </div>
       <div class="reset-filter d-flex-center mr-10 pl-10">
          <div class="material-icons">refresh</div>
@@ -25,8 +25,9 @@
 </template>
 
 <script setup lang="ts">
-import { onUpdated, ref } from 'vue';
+import { onUpdated, ref, reactive } from 'vue';
 import type { LogoTypeInterface } from '../../interfaces/logoType.interface'
+import type { statsInterface } from '@/interfaces/stats.interface'
 import Dropdown from '../Utils/Dropdown.vue'
 
 const props = defineProps<{
@@ -36,6 +37,7 @@ const props = defineProps<{
 const emit = defineEmits<{
    (e: 'exportChecked', value: string[]): void,
    (e: 'searchedPokemon', value: string): void,
+   (e: 'filter-emits', value: statsInterface[]): void,
 }>();
 
 onUpdated(() => emit('exportChecked', checkedElements.value))

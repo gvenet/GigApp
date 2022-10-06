@@ -25,6 +25,7 @@
   --hover-text-color: #81a9e7;
   --hover-background-color-1: #384357;
   --hover-background-color-2: #252729;
+  --hover-background-color-3: #3c4043;
 
   --button-radius: 15px;
 }
@@ -340,3 +341,13 @@ body {
     -webkit-transform: rotate(360deg);
   }
 }
+
+@keyframes demitour {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(180deg);
+  }
+}
+

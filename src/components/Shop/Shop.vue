@@ -1,7 +1,7 @@
 <template>
    <div class="container d-flex-center column justify-start">
       <div class="container-shop-list d-flex-center column">
-         <Filters class="filter " @export-checked="defCheckedElements" @searched-pokemon="defSearchPokemon"
+         <Filters class="filter " @export-checked="defCheckedElements" @searched-pokemon="defSearchPokemon" @filter-emits="defStats"
             :logoType="logoTypeBind" />
          <div class="shop-list d-flex">
             <template v-for="pokemon in props.pokemons" :key="pokemon.id">
@@ -22,6 +22,20 @@ import type { LogoTypeInterface } from '@/interfaces/logoType.interface'
 import ShopProduct from "./ShopProduct.vue";
 import logoTypeImport from "@/data/Elements"
 import Filters from "./Filters.vue"
+import type { statsInterface } from '@/interfaces/stats.interface';
+
+let stats = reactive<statsInterface[]>([
+  { isChecked: false, name: 'HP', value: 0 },
+  { isChecked: false, name: 'At', value: 0 },
+  { isChecked: false, name: 'Def', value: 0 },
+  { isChecked: false, name: 'Sp.At', value: 0 },
+  { isChecked: false, name: 'Sp.Def', value: 0 },
+  { isChecked: false, name: 'Speed', value: 0 },
+])
+
+function defStats(value: statsInterface[]) {
+   stats = value;
+}
 
 const props = defineProps<{
    pokemons: PokemonInterface[]
