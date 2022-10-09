@@ -1,8 +1,8 @@
 <template>
    <div class="container d-flex-center column justify-start">
       <div class="container-shop-list d-flex-center column">
-         <Filters class="filter " @export-checked="defCheckedElements" @searched-pokemon="defSearchPokemon" @filter-emits="defStats"
-            :logoType="logoTypeBind" />
+         <Filters class="filter " @export-checked="defCheckedElements" @searched-pokemon="defSearchPokemon"
+            @filter-emits="defStats" :logoType="logoTypeBind" />
          <div class="shop-list d-flex">
             <template v-for="pokemon in props.pokemons" :key="pokemon.id">
                <div class="flex-fill" v-if="filters(pokemon)">
@@ -25,16 +25,17 @@ import Filters from "./Filters.vue"
 import type { statsInterface } from '@/interfaces/stats.interface';
 
 let stats = reactive<statsInterface[]>([
-  { isChecked: false, name: 'HP', value: 0 },
-  { isChecked: false, name: 'At', value: 0 },
-  { isChecked: false, name: 'Def', value: 0 },
-  { isChecked: false, name: 'Sp.At', value: 0 },
-  { isChecked: false, name: 'Sp.Def', value: 0 },
-  { isChecked: false, name: 'Speed', value: 0 },
+   { isChecked: false, name: 'HP', value: 0 },
+   { isChecked: false, name: 'At', value: 0 },
+   { isChecked: false, name: 'Def', value: 0 },
+   { isChecked: false, name: 'Sp.At', value: 0 },
+   { isChecked: false, name: 'Sp.Def', value: 0 },
+   { isChecked: false, name: 'Speed', value: 0 },
 ])
 
 function defStats(value: statsInterface[]) {
    stats = value;
+   // console.log(stats[0].isChecked, stats[0].name, stats[0].value);
 }
 
 const props = defineProps<{
@@ -49,12 +50,18 @@ function defCheckedElements(value: string[]) {
 }
 
 const searchedPokemon = ref('');
+
 function defSearchPokemon(value: string) {
    searchedPokemon.value = value;
 }
 
+function searchStringNorm(str: string): string {
+   return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
 function filters(pokemon: PokemonInterface): boolean {
-   if (!pokemon.name.french.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").startsWith(searchedPokemon.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, ""))) {
+
+   if (!searchStringNorm(pokemon.name.french).startsWith(searchStringNorm(searchedPokemon.value))) {
       return false;
    }
    for (let checkedElement of checkedElements.value) {
