@@ -1,7 +1,7 @@
 <template>
   <div class="dropdown">
     <div class="dropdown-title d-flex-center mb-5 mt-5" :class="{clicked: toggle}" @click="toggle = !toggle;">
-      <span>Statistics</span>
+      <span>Stats</span>
       <div v-if="toggle" class="material-icons">arrow_drop_up</div>
       <div v-else class="material-icons">arrow_drop_down</div>
     </div>
@@ -68,9 +68,8 @@ onUpdated(() => emit('filter-emits', stats));
   background-color: var(--hover-background-color-3);
   border-radius: 15px;
   width: 350px;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  padding: 12px 16px;
+  left: -119px;
+  padding: 10px 5px;
   z-index: 1;
 }
 
