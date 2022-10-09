@@ -1,7 +1,7 @@
 <template>
   <div class="dropdown">
     <div class="dropdown-title d-flex-center mb-5 mt-5" :class="{clicked: toggle}" @click="toggle = !toggle;">
-      <span>Statistiques</span>
+      <span>Statistics</span>
       <div v-if="toggle" class="material-icons">arrow_drop_up</div>
       <div v-else class="material-icons">arrow_drop_down</div>
     </div>
@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { onUpdated, ref, reactive,  } from 'vue';
+import { onUpdated, ref, reactive, } from 'vue';
 import type { statsInterface } from '@/interfaces/stats.interface'
 
 
@@ -38,7 +38,7 @@ const stats = reactive([
 ])
 
 const emit = defineEmits<{
-   (e: 'filter-emits', value: statsInterface[]): void,
+  (e: 'filter-emits', value: statsInterface[]): void,
 }>();
 
 onUpdated(() => emit('filter-emits', stats));
@@ -85,7 +85,7 @@ onUpdated(() => emit('filter-emits', stats));
 input,
 input+label {
   cursor: pointer;
-  
+
   &:checked+label {
     color: var(--hover-text-color);
   }
@@ -96,10 +96,9 @@ input+label {
   font-size: 15px;
 }
 
-.dropdown-title:hover{
+.dropdown-title:hover {
   color: var(--hover-text-color);
   background-color: var(--hover-background-color-2);
   cursor: pointer;
 }
-
 </style>

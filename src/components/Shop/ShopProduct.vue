@@ -1,18 +1,18 @@
 <template>
    <div class="container p-10 m-5 d-flex justify-space-between">
       <div>
-         <h2 class="mb-10">{{pokemon.name.french}}</h2>
+         <h2 class="mb-10">{{pokemon.name.english}}</h2>
          <ProductElement name="HP" :def="pokemon.base.HP" />
          <ProductElement name="Attack" :def="pokemon.base.Attack" />
          <ProductElement name="Defense" :def="pokemon.base.Defense" />
          <ProductElement name="SP. Attack" :def="pokemon.base.SpAttack" />
          <ProductElement name="SP. Defense" :def="pokemon.base.SpDefense" />
-         <ProductElement name="Speed" :def="pokemon.base.SpDefense" />
-         <div class="d-flex-center">
-            <!-- <h3 class="mr-10">add to cart:</h3>
+         <ProductElement name="Speed" :def="pokemon.base.Speed" />
+         <!-- <div class="d-flex-center">
+            <h3 class="mr-10">add to cart:</h3>
             <button class="btn-primary material-icons mr-5" @click="">remove</button>
-            <button class="btn-primary material-icons" @click="">add</button> -->
-         </div>
+            <button class="btn-primary material-icons" @click="">add</button>
+         </div> -->
       </div>
       <div>
          <div class="d-flex-center justify-end mb-20">
@@ -42,7 +42,6 @@ defineProps<{ pokemon: PokemonInterface, logos: any }>()
 const popupTrigger = ref(false);
 
 function togglePopup() {
-   console.log("TEST : " + popupTrigger.value)
    popupTrigger.value = !popupTrigger.value;
 }
 
