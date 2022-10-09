@@ -1,0 +1,91 @@
+<template>
+	<div class="dropdown">
+		<div class="dropdown-title d-flex-center mb-5 mt-5" :class="{clicked: toggle}" @click="toggle = !toggle;">
+			<span>Elem</span>
+			<div v-if="toggle" class="material-icons">arrow_drop_up</div>
+			<div v-else class="material-icons">arrow_drop_down</div>
+		</div>
+		<div :class="{'dropdown-content': !toggle , 'dropdown-content-display': toggle}">
+			<template v-for="(elemType,i) in elemTypes" :key="i">
+				<input class="elem-filter" type="checkbox" :id=elemType :value=elemType v-model="checkedElements">
+				<label :for=elemType>
+					<div class="img-elem-filter-container d-flex-center">
+						<img class="img-elem-filter" :src="logoType[elemType as keyof typeof logoType]" alt="">
+					</div>
+				</label>
+			</template>
+		</div>
+	</div>
+</template>
+
+<script setup lang="ts">
+import { onUpdated, ref, reactive, } from 'vue';
+import type { statsInterface } from '@/interfaces/stats.interface'
+
+
+const toggle = ref(false);
+
+const emit = defineEmits<{
+	(e: 'filter-emits', value: statsInterface[]): void,
+}>();
+
+onUpdated(() => emit('filter-emits', stats));
+
+
+</script>
+
+<style scoped lang="scss">
+.clicked {
+	color: var(--hover-text-color);
+	background-color: var(--hover-background-color-2);
+	cursor: pointer;
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+}
+
+.dropdown-content-display {
+	display: block;
+	position: absolute;
+	background-color: var(--hover-background-color-3);
+	border-radius: 15px;
+	width: 350px;
+	left: -119px;
+	padding: 10px 5px;
+	z-index: 1;
+}
+
+.content-hover {
+	width: 100px;
+
+	&:hover {
+		background-color: var(--hover-background-color-1);
+	}
+}
+
+input,
+input+label {
+	cursor: pointer;
+
+	&:checked+label {
+		color: var(--hover-text-color);
+	}
+}
+
+.stat-value {
+	background-color: var(--hover-background-color-3);
+	font-size: 15px;
+}
+
+.dropdown-title:hover {
+	color: var(--hover-text-color);
+	background-color: var(--hover-background-color-2);
+	cursor: pointer;
+}
+</style>

@@ -1,6 +1,6 @@
 <template>
-   <div class="container p-10 m-5 d-flex justify-space-between">
-      <div>
+   <div class="container p-10 m-5 d-flex justify-space-between ">
+      <div class="">
          <h2 class="mb-10">{{pokemon.name.english}}</h2>
          <ProductElement name="HP" :def="pokemon.base.HP" />
          <ProductElement name="Attack" :def="pokemon.base.Attack" />
@@ -14,7 +14,7 @@
             <button class="btn-primary material-icons" @click="">add</button>
          </div> -->
       </div>
-      <div>
+      <div class="">
          <div class="d-flex-center justify-end mb-20">
             <div class="d-flex-center">
                <template v-for="typ in pokemon.type">
@@ -50,7 +50,7 @@ function togglePopup() {
 <style scoped lang="scss">
 .container {
    flex-basis: 100%;
-   min-width: 350px;
+   min-width: 300px;
    border: var(--border);
    border-radius: var(--border-radius);
    background-color: var(--hover-background-color-2);
@@ -67,8 +67,8 @@ function togglePopup() {
 }
 
 .pokemon-img-container {
-   width: 150px;
-   height: 150px;
+   width: 140px;
+   height: auto;
 }
 
 .element-logo {

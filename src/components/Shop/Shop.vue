@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed, type Ref } from 'vue';
+import { reactive } from 'vue';
 import type { PokemonInterface } from "@/interfaces/pokemon.interface";
 import type { LogoTypeInterface } from '@/interfaces/logoType.interface'
 import ShopProduct from "./ShopProduct.vue";
@@ -64,7 +64,7 @@ function searchStringNorm(str: string): string {
    return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
-function refreshFilter(value: boolean): void {
+function refreshFilter(): void {
    for (const stat of state.stats) {
       stat.isChecked = false;
       stat.value = 0;
@@ -104,7 +104,7 @@ function filters(pokemon: PokemonInterface): boolean {
 
 <style scoped lang="scss">
 .container-shop-list {
-   max-width: 1500px;
+   max-width: 1350px;
    width: 100%;
 }
 
@@ -114,6 +114,7 @@ function filters(pokemon: PokemonInterface): boolean {
 }
 
 .filter {
+   min-width: 340px;
    height: 50px;
    border: var(--border);
    border-radius: 50px;

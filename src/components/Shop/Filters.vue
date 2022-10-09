@@ -1,34 +1,46 @@
 <template>
    <div class="d-flex-center justify-space-between m-20">
-      <div class="search-filter d-flex-center justify-start ml-10">
-         <h5 class="material-icons">search</h5>
-         <input class="input-search-filter ml-10" type="text" placeholder="Search Pokémon" maxlength="16"
-            v-model="searchedPokemon">
-      </div>
-      <div class="stats-filter-container d-flex-center align-center justify-start">
-         <Dropdown class="ml-10 mr-10" @filter-emits="emit('filter-emits', $event)" />
+      <div class="d-flex-center">
+         <div class="search-filter d-flex-center justify-start ml-10">
+            <h5 class="material-icons">search</h5>
+            <input class="input-search-filter ml-10" type="text" placeholder="Search" maxlength="6"
+               v-model="searchedPokemon">
+         </div>
+         <div class="stats-filter-container d-flex-center justify-start ml-10">
+            <DropdownStatsFilter class="ml-10 mr-10" @filter-emits="emit('filter-emits', $event)" />
+         </div>
       </div>
       <div class="elem-filter-container d-flex-center flex-fill">
-         <template v-for="(elemType,i) in elemTypes" :key="i">
-            <input class="elem-filter" type="checkbox" :id=elemType :value=elemType v-model="checkedElements">
-            <label :for=elemType>
-               <div class="img-elem-filter-container d-flex-center">
-                  <img class="img-elem-filter" :src="logoType[elemType as keyof typeof logoType]" alt="">
-               </div>
-            </label>
+         <template v-if="windowSize > 950">
+            <ListElemFilter @export-checked="emit('export-checked', $event)" :logoType="props.logoType"
+               :checkedElements="props.checkedElements" />
+         </template>
+         <template v-else>
+            <DropdownElemFilter />
          </template>
       </div>
-      <div class="reset-filter d-flex-center mr-10 pl-10" @click="emit('refresh-filter', true)">
+      <!-- <div class="reset-filter d-flex-center mr-10 pl-10" @click="emit('refresh-filter')"> -->
+      <div class="reset-filter d-flex-center mr-10 pl-10" @click="emit('refresh-filter')">
          <div class="material-icons">refresh</div>
       </div>
    </div>
 </template>
 
 <script setup lang="ts">
-import { onUpdated, ref, reactive } from 'vue';
+import { onUpdated, onMounted, onUnmounted, ref, type Ref } from 'vue';
 import type { LogoTypeInterface } from '../../interfaces/logoType.interface'
 import type { statsInterface } from '@/interfaces/stats.interface'
-import Dropdown from '../Utils/Dropdown.vue'
+import DropdownStatsFilter from '../Utils/DropdownStatsFilter.vue'
+import DropdownElemFilter from '../Utils/DropdownElemFilter.vue'
+import ListElemFilter from './ListElemFilter.vue'
+
+const windowSize = ref(window.innerWidth)
+onMounted(() => {
+   window.addEventListener('resize', () => { windowSize.value = window.innerWidth })
+})
+onUnmounted(() => {
+   window.removeEventListener('resize', () => { windowSize.value = window.innerWidth })
+})
 
 const props = defineProps<{
    logoType: LogoTypeInterface,
@@ -36,17 +48,15 @@ const props = defineProps<{
    checkedElements: string[],
 }>();
 
+
 const emit = defineEmits<{
-   (e: 'exportChecked', value: string[]): void,
+   (e: 'export-checked', value: string[]): void,
    (e: 'searchedPokemon', value: string): void,
    (e: 'filter-emits', value: statsInterface[]): void,
-   (e: 'refresh-filter', value: boolean): void,
+   (e: 'refresh-filter'): void,
 }>();
 
-onUpdated(() => emit('exportChecked', props.checkedElements))
-onUpdated(() => emit('searchedPokemon', props.searchedPokemon))
-
-const elemTypes = ref(["Bug", "Dragon", "Electric", "Fairy", "Fighting", "Fire", "Flying", "Ghost", "Grass", "Ground", "Ice", "Normal", "Poison", "Psychic", "Rock", "Steel", "Water"]);
+onUpdated(() => emit('searchedPokemon', props.searchedPokemon));
 
 </script>
 
@@ -84,7 +94,7 @@ const elemTypes = ref(["Bug", "Dragon", "Electric", "Fairy", "Fighting", "Fire",
 
 .input-search-filter {
    font-size: var(--font-size);
-   width: 130px;
+   width: 70px;
 
    &::-webkit-input-placeholder {
       color: var(--text-primary-color);
