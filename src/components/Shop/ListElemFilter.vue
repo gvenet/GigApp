@@ -1,6 +1,6 @@
 <template>
 	<template v-for="elemType of elemTypes">
-		<input class="elem-filter" type="checkbox" :id=elemType :value=elemType v-model="localCheckedElements">
+		<input class="elem-filter" type="checkbox" :id=elemType :value=elemType v-model="checkedElements">
 		<label :for=elemType>
 			<div class=" img-elem-filter-container d-flex-center">
 				<img class="img-elem-filter" :src="logoType[elemType as keyof typeof logoType]" alt="">
@@ -10,22 +10,21 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onUpdated, ref, type WritableComputedRef, type Ref } from 'vue';
+import { onUpdated } from 'vue';
 import type { LogoTypeInterface } from '@/interfaces/logoType.interface'
 
 const props = defineProps<{
 	logoType: LogoTypeInterface,
 	checkedElements: string[],
 }>();
-const localCheckedElements = ref(props.checkedElements);
+
 const elemTypes = ["Bug", "Dragon", "Electric", "Fairy", "Fighting", "Fire", "Flying", "Ghost", "Grass", "Ground", "Ice", "Normal", "Poison", "Psychic", "Rock", "Steel", "Water"];
-// const localCheckedElements = computed<string[]>(() => props.checkedElements);
 
 const emit = defineEmits<{
 	(e: 'export-checked', value: string[]): void,
 }>();
 
-onUpdated(() => emit('export-checked', localCheckedElements.value))
+onUpdated(() => emit('export-checked', props.checkedElements))
 
 </script>
 

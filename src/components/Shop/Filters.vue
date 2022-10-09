@@ -13,13 +13,12 @@
       <div class="elem-filter-container d-flex-center flex-fill">
          <template v-if="windowSize > 950">
             <ListElemFilter @export-checked="emit('export-checked', $event)" :logoType="props.logoType"
-               :checkedElements="props.checkedElements" />
+               :checkedElements="checkedElements" />
          </template>
          <template v-else>
             <DropdownElemFilter />
          </template>
       </div>
-      <!-- <div class="reset-filter d-flex-center mr-10 pl-10" @click="emit('refresh-filter')"> -->
       <div class="reset-filter d-flex-center mr-10 pl-10" @click="emit('refresh-filter')">
          <div class="material-icons">refresh</div>
       </div>
