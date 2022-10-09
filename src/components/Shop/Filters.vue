@@ -5,6 +5,9 @@
          <input class="input-search-filter ml-10" type="text" placeholder="Search Pokémon" maxlength="16"
             v-model="searchedPokemon">
       </div>
+      <div class="stats-filter-container d-flex-center align-center justify-start">
+         <Dropdown class="ml-10 mr-10" @filter-emits="emit('filter-emits', $event)" />
+      </div>
       <div class="elem-filter-container d-flex-center flex-fill">
          <template v-for="(elemType,i) in elemTypes" :key="i">
             <input class="elem-filter" type="checkbox" :id=elemType :value=elemType v-model="checkedElements">
@@ -14,9 +17,6 @@
                </div>
             </label>
          </template>
-      </div>
-      <div class="stats-filter-container d-flex-center align-center justify-start flex-fill">
-         <Dropdown class="ml-10" @filter-emits="emit('filter-emits', $event)"/>
       </div>
       <div class="reset-filter d-flex-center mr-10 pl-10">
          <div class="material-icons">refresh</div>
@@ -60,7 +60,6 @@ const searchedPokemon = ref('');
 }
 
 .elem-filter-container {
-   border-right: var(--border);
    height: 50px;
 }
 
@@ -84,7 +83,7 @@ const searchedPokemon = ref('');
 
 .input-search-filter {
    font-size: var(--font-size);
-   width: 150px;
+   width: 130px;
 
    &::-webkit-input-placeholder {
       color: var(--text-primary-color);
@@ -100,7 +99,9 @@ const searchedPokemon = ref('');
 }
 
 .stats-filter-container {
+   border-right: var(--border);
    height: 50px;
+   // width: 130px
 }
 
 .reset-filter {

@@ -24,47 +24,63 @@ import logoTypeImport from "@/data/Elements"
 import Filters from "./Filters.vue"
 import type { statsInterface } from '@/interfaces/stats.interface';
 
-let stats = reactive<statsInterface[]>([
-   { isChecked: false, name: 'HP', value: 0 },
-   { isChecked: false, name: 'At', value: 0 },
-   { isChecked: false, name: 'Def', value: 0 },
-   { isChecked: false, name: 'Sp.At', value: 0 },
-   { isChecked: false, name: 'Sp.Def', value: 0 },
-   { isChecked: false, name: 'Speed', value: 0 },
-])
+const state = reactive<{
+   stats: statsInterface[],
+   searchedPokemon: string,
+   checkedElements: string[],
+}>({
+   stats: [
+      { isChecked: false, name: 'HP', value: 0 },
+      { isChecked: false, name: 'At', value: 0 },
+      { isChecked: false, name: 'Def', value: 0 },
+      { isChecked: false, name: 'Sp.At', value: 0 },
+      { isChecked: false, name: 'Sp.Def', value: 0 },
+      { isChecked: false, name: 'Speed', value: 0 },
+   ],
+   searchedPokemon: '',
+   checkedElements: [],
+});
 
-function defStats(value: statsInterface[]) {
-   stats = value;
-   // console.log(stats[0].isChecked, stats[0].name, stats[0].value);
-}
 
 const props = defineProps<{
    pokemons: PokemonInterface[]
 }>();
 
 const logoTypeBind: LogoTypeInterface = logoTypeImport;
-const checkedElements: Ref<string[]> = ref([])
 
 function defCheckedElements(value: string[]) {
-   checkedElements.value = value;
+   state.checkedElements = value;
 }
-
-const searchedPokemon = ref('');
 
 function defSearchPokemon(value: string) {
-   searchedPokemon.value = value;
+   state.searchedPokemon = value;
 }
 
+function defStats(value: statsInterface[]) {
+   state.stats = value;
+}
 function searchStringNorm(str: string): string {
    return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
 function filters(pokemon: PokemonInterface): boolean {
-
-   if (!searchStringNorm(pokemon.name.french).startsWith(searchStringNorm(searchedPokemon.value))) {
+   const pokemonStats = [
+      pokemon.base.HP,
+      pokemon.base.Attack,
+      pokemon.base.Defense,
+      pokemon.base.SpAttack,
+      pokemon.base.SpDefense,
+      pokemon.base.Speed
+   ];
+   for (const [index, stat] of state.stats.entries()) {
+      if (stat.isChecked && stat.value > pokemonStats[index]) {
+         return false;
+      }
+   }
+   if (!searchStringNorm(pokemon.name.french).startsWith(searchStringNorm(state.searchedPokemon))) {
       return false;
    }
-   for (let checkedElement of checkedElements.value) {
+   for (let checkedElement of state.checkedElements) {
       if (!pokemon.type?.includes(checkedElement)) {
          return false;
       }
