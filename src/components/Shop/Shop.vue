@@ -2,7 +2,8 @@
    <div class="container d-flex-center column justify-start">
       <div class="container-shop-list d-flex-center column">
          <Filters class="filter " @export-checked="defCheckedElements" @searched-pokemon="defSearchPokemon"
-            @filter-emits="defStats" :logoType="logoTypeBind" />
+            @filter-emits="defStats" @refresh-filter="refreshFilter" :logoType="logoTypeBind"
+            :searchedPokemon="state.searchedPokemon" :checkedElements="state.checkedElements" />
          <div class="shop-list d-flex">
             <template v-for="pokemon in props.pokemons" :key="pokemon.id">
                <div class="flex-fill" v-if="filters(pokemon)">
@@ -41,7 +42,6 @@ const state = reactive<{
    checkedElements: [],
 });
 
-
 const props = defineProps<{
    pokemons: PokemonInterface[]
 }>();
@@ -59,8 +59,18 @@ function defSearchPokemon(value: string) {
 function defStats(value: statsInterface[]) {
    state.stats = value;
 }
+
 function searchStringNorm(str: string): string {
    return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+function refreshFilter(value: boolean): void {
+   for (const stat of state.stats) {
+      stat.isChecked = false;
+      stat.value = 0;
+   };
+   state.checkedElements = [];
+   state.searchedPokemon = '';
 }
 
 function filters(pokemon: PokemonInterface): boolean {
@@ -77,7 +87,7 @@ function filters(pokemon: PokemonInterface): boolean {
          return false;
       }
    }
-   if (!searchStringNorm(pokemon.name.french).startsWith(searchStringNorm(state.searchedPokemon))) {
+   if (!searchStringNorm(pokemon.name.english).startsWith(searchStringNorm(state.searchedPokemon))) {
       return false;
    }
    for (let checkedElement of state.checkedElements) {
@@ -95,10 +105,12 @@ function filters(pokemon: PokemonInterface): boolean {
 <style scoped lang="scss">
 .container-shop-list {
    max-width: 1500px;
+   width: 100%;
 }
 
 .shop-list {
    flex-wrap: wrap;
+   width: 100%;
 }
 
 .filter {

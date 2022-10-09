@@ -18,7 +18,7 @@
             </label>
          </template>
       </div>
-      <div class="reset-filter d-flex-center mr-10 pl-10">
+      <div class="reset-filter d-flex-center mr-10 pl-10" @click="emit('refresh-filter', true)">
          <div class="material-icons">refresh</div>
       </div>
    </div>
@@ -32,20 +32,21 @@ import Dropdown from '../Utils/Dropdown.vue'
 
 const props = defineProps<{
    logoType: LogoTypeInterface,
+   searchedPokemon: string,
+   checkedElements: string[],
 }>();
 
 const emit = defineEmits<{
    (e: 'exportChecked', value: string[]): void,
    (e: 'searchedPokemon', value: string): void,
    (e: 'filter-emits', value: statsInterface[]): void,
+   (e: 'refresh-filter', value: boolean): void,
 }>();
 
-onUpdated(() => emit('exportChecked', checkedElements.value))
-onUpdated(() => emit('searchedPokemon', searchedPokemon.value))
+onUpdated(() => emit('exportChecked', props.checkedElements))
+onUpdated(() => emit('searchedPokemon', props.searchedPokemon))
 
-const checkedElements = ref([])
 const elemTypes = ref(["Bug", "Dragon", "Electric", "Fairy", "Fighting", "Fire", "Flying", "Ghost", "Grass", "Ground", "Ice", "Normal", "Poison", "Psychic", "Rock", "Steel", "Water"]);
-const searchedPokemon = ref('');
 
 </script>
 
@@ -101,7 +102,6 @@ const searchedPokemon = ref('');
 .stats-filter-container {
    border-right: var(--border);
    height: 50px;
-   // width: 130px
 }
 
 .reset-filter {
