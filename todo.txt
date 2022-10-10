@@ -1,3 +1,6 @@
 -ajouter une bdd et ajouter les infos pokemon dedans
--ajouter un baack en python-flask
--ajouter un formulaire de connexion google alliee a une base de donnee.
+   - utilisation de mongodb
+-ajouter un back en python-flask
+   - creer l'api back-front
+-ajouter un formulaire de connexion google (OAuth 2.0)
+   - https://developers.google.com/identity/protocols/oauth2
