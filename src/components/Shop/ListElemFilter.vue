@@ -38,10 +38,6 @@ onUpdated(() => emit('export-checked', props.checkedElements))
 	}
 }
 
-.elem-filter-container {
-	height: 50px;
-}
-
 .img-elem-filter-container {
 	width: 35px;
 }
@@ -51,54 +47,6 @@ onUpdated(() => emit('export-checked', props.checkedElements))
 
 	&:hover {
 		width: 100%;
-		cursor: pointer;
-	}
-}
-
-.search-filter {
-	border-right: var(--border);
-	height: 50px;
-}
-
-.input-search-filter {
-	font-size: var(--font-size);
-	width: 70px;
-
-	&::-webkit-input-placeholder {
-		color: var(--text-primary-color);
-	}
-
-	&:focus::-webkit-input-placeholder {
-		color: var(--hover-text-color);
-	}
-
-	:focus {
-		color: var(--hover-text-color);
-	}
-}
-
-.stats-filter-container {
-	border-right: var(--border);
-	height: 50px;
-}
-
-.reset-filter {
-	border-left: var(--border);
-	height: 50px;
-	color: var(--text-secondary-color);
-
-	&:hover {
-		color: var(--text-primary-color);
-		cursor: pointer;
-	}
-}
-
-.stats-filter {
-	height: 40px;
-
-	&:hover {
-		color: var(--hover-text-color);
-		background-color: var(--hover-background-color-2);
 		cursor: pointer;
 	}
 }

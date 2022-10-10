@@ -61,30 +61,8 @@ onUpdated(() => emit('searchedPokemon', props.searchedPokemon));
 </script>
 
 <style lang="scss" scoped>
-.elem-filter {
-   display: none;
-
-   &:checked+label>div>img {
-      animation: rotating 2s linear infinite;
-      width: 100%;
-   }
-}
-
 .elem-filter-container {
    height: 50px;
-}
-
-.img-elem-filter-container {
-   width: 35px;
-}
-
-.img-elem-filter {
-   width: 20px;
-
-   &:hover {
-      width: 100%;
-      cursor: pointer;
-   }
 }
 
 .search-filter {
@@ -121,16 +99,6 @@ onUpdated(() => emit('searchedPokemon', props.searchedPokemon));
 
    &:hover {
       color: var(--text-primary-color);
-      cursor: pointer;
-   }
-}
-
-.stats-filter {
-   height: 40px;
-
-   &:hover {
-      color: var(--hover-text-color);
-      background-color: var(--hover-background-color-2);
       cursor: pointer;
    }
 }
