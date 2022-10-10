@@ -1,0 +1,3 @@
+-ajouter une bdd et ajouter les infos pokemon dedans
+-ajouter un baack en python-flask
+-ajouter un formulaire de connexion google alliee a une base de donnee.
