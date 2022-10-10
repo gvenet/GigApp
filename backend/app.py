@@ -8,13 +8,30 @@ app.config['MONGODB_SETTINGS'] = {
     'host': 'localhost',
     'port': 27017
 }
-db = MongoEngine()
-db.init_app(app)
+me = MongoEngine()
+me.init_app(app)
 
-class Pokemon(db.Document) :
-    name = db.StringField()
+class Imdb(me.EmbeddedDocument):
+    imdb_id = me.StringField()
+    rating = me.DecimalField()
+    votes = me.IntField()
 
-Pokemon.object(name="jean").first()
+class Movie(me.Document):
+    title = me.StringField(required=True)
+    year = me.IntField()
+    rated = me.StringField()
+    director = me.StringField()
+    actors = me.ListField()
+    imdb = me.EmbeddedDocumentField(Imdb)
+
+
+bttf = Movie(title="Back To The Future", year=1985)
+bttf.actors = [
+    "Michael J. Fox",
+    "Christopher Lloyd"
+]
+bttf.imdb = Imdb(imdb_id="tt0088763", rating=8.5)
+bttf.save()
 
 if __name__ == "__main__":
     app.run(debug=True)
