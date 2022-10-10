@@ -13,7 +13,7 @@
             <label :for=stat.name>{{stat.name}}</label>
           </div>
           <input class="stat-value" type="number" min="0" max="255" v-model="stat.value">
-          <input type="range" style="width: 150px" min="0" max="255" v-model="stat.value">
+          <input type="range" style="width: 100px" min="0" max="255" v-model="stat.value">
         </div>
       </template>
     </div>
@@ -67,7 +67,7 @@ onUpdated(() => emit('filter-emits', stats));
   position: absolute;
   background-color: var(--hover-background-color-3);
   border-radius: 15px;
-  width: 350px;
+  width: 300px;
   left: -119px;
   padding: 10px 5px;
   z-index: 1;

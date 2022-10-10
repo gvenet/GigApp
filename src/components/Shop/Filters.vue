@@ -6,9 +6,9 @@
             <input class="input-search-filter ml-10" type="text" placeholder="Search" maxlength="6"
                v-model="searchedPokemon">
          </div>
-         <div class="stats-filter-container d-flex-center justify-start ml-10">
-            <DropdownStatsFilter class="ml-10 mr-10" @filter-emits="emit('filter-emits', $event)" />
-         </div>
+      </div>
+      <div class="stats-filter-container d-flex-center flex-fill">
+         <DropdownStatsFilter class="ml-10 mr-10" @filter-emits="emit('filter-emits', $event)" />
       </div>
       <div class="elem-filter-container d-flex-center flex-fill">
          <template v-if="windowSize > 950">
@@ -16,7 +16,8 @@
                :checkedElements="checkedElements" />
          </template>
          <template v-else>
-            <DropdownElemFilter />
+            <DropdownElemFilter @export-checked="emit('export-checked', $event)" :logoType="props.logoType"
+               :checkedElements="checkedElements" />
          </template>
       </div>
       <div class="reset-filter d-flex-center mr-10 pl-10" @click="emit('refresh-filter')">

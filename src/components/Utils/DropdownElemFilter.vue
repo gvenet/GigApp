@@ -5,32 +5,39 @@
 			<div v-if="toggle" class="material-icons">arrow_drop_up</div>
 			<div v-else class="material-icons">arrow_drop_down</div>
 		</div>
-		<div :class="{'dropdown-content': !toggle , 'dropdown-content-display': toggle}">
-			<template v-for="(elemType,i) in elemTypes" :key="i">
-				<input class="elem-filter" type="checkbox" :id=elemType :value=elemType v-model="checkedElements">
-				<label :for=elemType>
-					<div class="img-elem-filter-container d-flex-center">
-						<img class="img-elem-filter" :src="logoType[elemType as keyof typeof logoType]" alt="">
-					</div>
-				</label>
-			</template>
+		<div :class="{'dropdown-content-hide': !toggle , 'dropdown-content-display': toggle}">
+			<div class="d-flex-center flex-wrap">
+				<template v-for="(elemType,i) in elemTypes" :key="i">
+					<input class="elem-filter" type="checkbox" :id=elemType :value=elemType v-model="checkedElements">
+					<label :for=elemType>
+						<div class="img-elem-filter-container d-flex-center">
+							<img class="img-elem-filter" :src="logoType[elemType as keyof typeof logoType]" alt="">
+						</div>
+					</label>
+				</template>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
 import { onUpdated, ref, reactive, } from 'vue';
-import type { statsInterface } from '@/interfaces/stats.interface'
-
+import type { LogoTypeInterface } from '@/interfaces/logoType.interface'
 
 const toggle = ref(false);
 
-const emit = defineEmits<{
-	(e: 'filter-emits', value: statsInterface[]): void,
+const props = defineProps<{
+	logoType: LogoTypeInterface,
+	checkedElements: string[],
 }>();
 
-onUpdated(() => emit('filter-emits', stats));
+const elemTypes = ["Bug", "Dragon", "Electric", "Fairy", "Fighting", "Fire", "Flying", "Ghost", "Grass", "Ground", "Ice", "Normal", "Poison", "Psychic", "Rock", "Steel", "Water"];
 
+const emit = defineEmits<{
+	(e: 'export-checked', value: string[]): void,
+}>();
+
+onUpdated(() => emit('export-checked', props.checkedElements))
 
 </script>
 
@@ -46,7 +53,7 @@ onUpdated(() => emit('filter-emits', stats));
 	display: inline-block;
 }
 
-.dropdown-content {
+.dropdown-content-hide {
 	display: none;
 }
 
@@ -55,37 +62,36 @@ onUpdated(() => emit('filter-emits', stats));
 	position: absolute;
 	background-color: var(--hover-background-color-3);
 	border-radius: 15px;
-	width: 350px;
-	left: -119px;
+	width: 120px;
 	padding: 10px 5px;
 	z-index: 1;
-}
-
-.content-hover {
-	width: 100px;
-
-	&:hover {
-		background-color: var(--hover-background-color-1);
-	}
-}
-
-input,
-input+label {
-	cursor: pointer;
-
-	&:checked+label {
-		color: var(--hover-text-color);
-	}
-}
-
-.stat-value {
-	background-color: var(--hover-background-color-3);
-	font-size: 15px;
 }
 
 .dropdown-title:hover {
 	color: var(--hover-text-color);
 	background-color: var(--hover-background-color-2);
 	cursor: pointer;
+}
+
+.img-elem-filter-container {
+	width: 35px;
+	height: 35px;
+}
+
+.img-elem-filter {
+	width: 20px;
+
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+.elem-filter {
+	display: none;
+
+	&:checked+label>div>img {
+		animation: rotating 2s linear infinite;
+		width: 100%;
+	}
 }
 </style>

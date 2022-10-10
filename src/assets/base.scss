@@ -177,6 +177,10 @@ body {
   flex: 1 1 auto;
 }
 
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
 .d-flex-center {
   @extend .d-flex, .justify-center, .align-center;
 }
