@@ -4,5 +4,5 @@
    - creer l'api back-front
 -ajouter un formulaire de connexion google (OAuth 2.0)
    - https://developers.google.com/identity/protocols/oauth2
-
+-ameliorer la communication des composants avec v-model sur composant (nottament sur shop/filter)
 
