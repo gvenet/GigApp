@@ -10,8 +10,9 @@
 </template>
 
 <script setup lang="ts">
-import { onUpdated,inject } from 'vue';
+import { onUpdated, inject } from 'vue';
 import type { LogoTypeInterface } from '@/interfaces/logoType.interface'
+import { elemTypesKeys, logoTypesKeys } from '@/provideKeys/provideKeys';
 
 const props = defineProps<{
 	checkedElements: string[],
@@ -21,8 +22,9 @@ const emit = defineEmits<{
 	(e: 'export-checked', value: string[]): void,
 }>();
 
-const elemTypes = inject<Readonly<string[]>>('elemTypes')!
-const logoTypes = inject<Readonly<LogoTypeInterface>>('logoTypes')!
+const { elemTypes } = inject<Readonly<{ elemTypes: string[] }>>(elemTypesKeys)!
+const { logoTypes } = inject<Readonly<{ logoTypes: LogoTypeInterface }>>(logoTypesKeys)!
+
 
 onUpdated(() => emit('export-checked', props.checkedElements));
 

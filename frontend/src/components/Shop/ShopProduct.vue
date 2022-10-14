@@ -37,6 +37,7 @@ import ProductElement from "./ProductElement.vue";
 import type { PokemonInterface } from "../../interfaces/pokemon.interface";
 import Popup from "../Utils/Popup.vue";
 import type { LogoTypeInterface } from "@/interfaces/logoType.interface";
+import { logoTypesKeys } from "@/provideKeys/provideKeys";
 
 defineProps<{
    pokemon: PokemonInterface,
@@ -44,7 +45,7 @@ defineProps<{
 
 const popupTrigger = ref(false);
 
-const logoTypes = inject<Readonly<LogoTypeInterface>>('logoTypes')!
+const { logoTypes } = inject<Readonly<{logoTypes: LogoTypeInterface}>>(logoTypesKeys)!
 
 </script>
 
