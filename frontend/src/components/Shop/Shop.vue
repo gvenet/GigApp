@@ -1,12 +1,10 @@
 <template>
    <div class="container d-flex-center column justify-start">
       <div class="container-shop-list d-flex-center column">
-         <!-- <Filters class="filter " @export-checked="defCheckedElements" @searched-pokemon="defSearchPokemon"
-            @filter-emits="defStats" @refresh-filter="refreshFilter" :logoType="logoTypeBind"
-            :searchedPokemon="state.searchedPokemon" :checkedElements="state.checkedElements" /> -->
-         <Filters class="filter " @export-checked="defCheckedElements" 
-            @filter-emits="defStats" @refresh-filter="refreshFilter"
-            v-model:searchedPokemon="state.searchedPokemon" :checkedElements="state.checkedElements" />
+         <Filters class="filter " @export-checked="defCheckedElements" @filter-emits="defStats"
+            @refresh-filter="refreshFilter" v-model:searchedPokemon="state.searchedPokemon"
+            :checkedElements="state.checkedElements"
+            :stats="state.stats" />
          <div class="shop-list d-flex">
             <template v-for="pokemon of pokemons" :key="pokemon.id">
                <div class="flex-fill" v-if="filters(pokemon)">

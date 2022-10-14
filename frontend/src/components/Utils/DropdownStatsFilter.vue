@@ -6,7 +6,7 @@
       <div v-else class="material-icons">arrow_drop_down</div>
     </div>
     <div :class="{'dropdown-content': !toggle , 'dropdown-content-display': toggle}">
-      <template v-for="(stat, index) of stats" :key="index">
+      <template v-for="(stat, index) of props.stats" :key="index">
         <div class="d-flex-center justify-space-between">
           <div class="content-hover">
             <input class="content-checkbox" type="checkbox" :id=stat.name :value=stat.name v-model="stat.isChecked">
@@ -27,21 +27,15 @@ import type { statsInterface } from '@/interfaces/stats.interface'
 
 const toggle = ref(false);
 
-
-const stats = reactive([
-  { isChecked: false, name: 'HP', value: 0 },
-  { isChecked: false, name: 'At', value: 0 },
-  { isChecked: false, name: 'Def', value: 0 },
-  { isChecked: false, name: 'Sp.At', value: 0 },
-  { isChecked: false, name: 'Sp.Def', value: 0 },
-  { isChecked: false, name: 'Speed', value: 0 },
-])
+const props = defineProps<{
+  stats: statsInterface[],
+}>();
 
 const emit = defineEmits<{
   (e: 'filter-emits', value: statsInterface[]): void,
 }>();
 
-onUpdated(() => emit('filter-emits', stats));
+onUpdated(() => emit('filter-emits', props.stats));
 
 
 </script>

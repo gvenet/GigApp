@@ -9,7 +9,7 @@
          </div>
       </div>
       <div class="stats-filter-container d-flex-center flex-fill">
-         <DropdownStatsFilter class="ml-10 mr-10" @filter-emits="emit('filter-emits', $event)" />
+         <DropdownStatsFilter class="ml-10 mr-10" @filter-emits="emit('filter-emits', $event)" :stats="props.stats" />
       </div>
       <div class="elem-filter-container d-flex-center flex-fill">
          <template v-if="windowSize > 950">
@@ -45,6 +45,7 @@ onUnmounted(() => {
 const props = defineProps<{
    searchedPokemon: string,
    checkedElements: string[],
+   stats: statsInterface[],
 }>();
 
 
