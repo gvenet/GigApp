@@ -7,11 +7,6 @@
          <Filters class="filter " @export-checked="defCheckedElements" 
             @filter-emits="defStats" @refresh-filter="refreshFilter"
             v-model:searchedPokemon="state.searchedPokemon" :checkedElements="state.checkedElements" />
-         <div>
-
-            {{state.searchedPokemon}}
-         </div>
-            
          <div class="shop-list d-flex">
             <template v-for="pokemon of pokemons" :key="pokemon.id">
                <div class="flex-fill" v-if="filters(pokemon)">
