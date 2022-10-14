@@ -1,13 +1,21 @@
 <template>
    <div class="container d-flex-center column justify-start">
       <div class="container-shop-list d-flex-center column">
-         <Filters class="filter " @export-checked="defCheckedElements" @searched-pokemon="defSearchPokemon"
+         <!-- <Filters class="filter " @export-checked="defCheckedElements" @searched-pokemon="defSearchPokemon"
             @filter-emits="defStats" @refresh-filter="refreshFilter" :logoType="logoTypeBind"
-            :searchedPokemon="state.searchedPokemon" :checkedElements="state.checkedElements" />
+            :searchedPokemon="state.searchedPokemon" :checkedElements="state.checkedElements" /> -->
+         <Filters class="filter " @export-checked="defCheckedElements" 
+            @filter-emits="defStats" @refresh-filter="refreshFilter"
+            v-model:searchedPokemon="state.searchedPokemon" :checkedElements="state.checkedElements" />
+         <div>
+
+            {{state.searchedPokemon}}
+         </div>
+            
          <div class="shop-list d-flex">
-            <template v-for="pokemon in props.pokemons" :key="pokemon.id">
+            <template v-for="pokemon of pokemons" :key="pokemon.id">
                <div class="flex-fill" v-if="filters(pokemon)">
-                  <ShopProduct :pokemon="pokemon" :logos="logoTypeBind" />
+                  <ShopProduct :pokemon="pokemon" />
                </div>
             </template>
          </div>
@@ -17,11 +25,12 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { readonly, provide, reactive } from 'vue';
 import type { PokemonInterface } from "@/interfaces/pokemon.interface";
 import type { LogoTypeInterface } from '@/interfaces/logoType.interface'
 import ShopProduct from "./ShopProduct.vue";
-import logoTypeImport from "@/data/Elements"
+import logoTypesImport from "@/data/logoTypes"
+import elemTypesImport from "@/data/elemTypes"
 import Filters from "./Filters.vue"
 import type { statsInterface } from '@/interfaces/stats.interface';
 
@@ -42,18 +51,17 @@ const state = reactive<{
    checkedElements: [],
 });
 
-const props = defineProps<{
+defineProps<{
    pokemons: PokemonInterface[]
 }>();
 
-const logoTypeBind: LogoTypeInterface = logoTypeImport;
+provide<Readonly<string[]>>('elemTypes', readonly(elemTypesImport));
+// injected in DropdownElemFiler, ListElemFilter
+provide<Readonly<LogoTypeInterface>>('logoTypes', readonly(logoTypesImport));
+// injected in DropdownElemFiler, ListElemFilter, ShopProduct
 
 function defCheckedElements(value: string[]) {
    state.checkedElements = value;
-}
-
-function defSearchPokemon(value: string) {
-   state.searchedPokemon = value;
 }
 
 function defStats(value: statsInterface[]) {

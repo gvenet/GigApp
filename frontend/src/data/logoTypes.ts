@@ -15,9 +15,8 @@ import Psychic from "../assets/ElementTypeLogo/Psychic.svg";
 import Rock from "../assets/ElementTypeLogo/Rock.svg";
 import Steel from "../assets/ElementTypeLogo/Steel.svg";
 import Water from "../assets/ElementTypeLogo/Water.svg";
-import { ref } from "vue";
 
-const logoType = {
+const logoTypes = {
   Bug,
   Dragon,
   Electric,
@@ -37,4 +36,4 @@ const logoType = {
   Water,
 };
 
-export default logoType
+export default logoTypes
