@@ -32,12 +32,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, inject, type Ref } from "vue";
+import { ref, inject} from "vue";
 import ProductElement from "./ProductElement.vue";
-import type { PokemonInterface } from "../../interfaces/pokemon.interface";
+import type { PokemonInterface } from "@/interfaces";
 import Popup from "../Utils/Popup.vue";
-import type { LogoTypeInterface } from "@/interfaces/logoType.interface";
-import { logoTypesKeys } from "@/provideKeys/provideKeys";
+import { pokemonTypesKeys } from "@/provideKeys/provideKeys";
 
 defineProps<{
    pokemon: PokemonInterface,
@@ -45,7 +44,7 @@ defineProps<{
 
 const popupTrigger = ref(false);
 
-const { logoTypes } = inject<Readonly<{logoTypes: LogoTypeInterface}>>(logoTypesKeys)!
+const { logoTypes } = inject(pokemonTypesKeys)!;
 
 </script>
 

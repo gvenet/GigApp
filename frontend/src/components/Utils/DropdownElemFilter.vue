@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import { onUpdated, ref, reactive, inject} from 'vue';
 import type { LogoTypeInterface } from '@/interfaces/logoType.interface'
-import { elemTypesKeys, logoTypesKeys } from '@/provideKeys/provideKeys';
+import { pokemonTypesKeys } from '@/provideKeys/provideKeys';
 
 const toggle = ref(false);
 
@@ -31,8 +31,7 @@ const props = defineProps<{
 	checkedElements: string[],
 }>();
 
-const { elemTypes } = inject<Readonly<{ elemTypes: string[] }>>(elemTypesKeys)!
-const { logoTypes } = inject<Readonly<{ logoTypes: LogoTypeInterface }>>(logoTypesKeys)!
+const { logoTypes, elemTypes } = inject(pokemonTypesKeys)!;
 
 const emit = defineEmits<{
 	(e: 'export-checked', value: string[]): void,

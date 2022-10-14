@@ -19,15 +19,13 @@
 
 <script setup lang="ts">
 import { readonly, provide, reactive,} from 'vue';
-import type { InjectionKey } from "vue";
 import type { PokemonInterface } from "@/interfaces/pokemon.interface";
-import type { LogoTypeInterface } from '@/interfaces/logoType.interface'
 import ShopProduct from "./ShopProduct.vue";
 import logoTypesImport from "@/data/logoTypes"
 import elemTypesImport from "@/data/elemTypes"
 import Filters from "./Filters.vue"
 import type { statsInterface } from '@/interfaces/stats.interface';
-import { elemTypesKeys, logoTypesKeys } from '@/provideKeys/provideKeys';
+import { pokemonTypesKeys } from '@/provideKeys/provideKeys';
 
 const state = reactive<{
    stats: statsInterface[],
@@ -51,9 +49,10 @@ defineProps<{
 }>();
 
 
-provide(elemTypesKeys, { elemTypes: readonly(elemTypesImport) });
-// injected in DropdownElemFiler, ListElemFilter
-provide(logoTypesKeys, { logoTypes: readonly(logoTypesImport) });
+provide(pokemonTypesKeys, {
+   logoTypes: readonly(logoTypesImport),
+   elemTypes: readonly(elemTypesImport),
+});
 // injected in DropdownElemFiler, ListElemFilter, ShopProduct
 
 function defCheckedElements(value: string[]) {

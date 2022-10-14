@@ -12,7 +12,7 @@
 <script setup lang="ts">
 import { onUpdated, inject } from 'vue';
 import type { LogoTypeInterface } from '@/interfaces/logoType.interface'
-import { elemTypesKeys, logoTypesKeys } from '@/provideKeys/provideKeys';
+import { pokemonTypesKeys } from '@/provideKeys/provideKeys';
 
 const props = defineProps<{
 	checkedElements: string[],
@@ -22,8 +22,8 @@ const emit = defineEmits<{
 	(e: 'export-checked', value: string[]): void,
 }>();
 
-const { elemTypes } = inject<Readonly<{ elemTypes: string[] }>>(elemTypesKeys)!
-const { logoTypes } = inject<Readonly<{ logoTypes: LogoTypeInterface }>>(logoTypesKeys)!
+const { logoTypes, elemTypes } = inject(pokemonTypesKeys)!;
+
 
 
 onUpdated(() => emit('export-checked', props.checkedElements));
