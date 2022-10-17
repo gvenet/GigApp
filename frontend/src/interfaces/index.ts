@@ -1,3 +1,3 @@
-export type { LogoTypeInterface } from "./logoType.interface";
-export type { PokemonInterface } from "./pokemon.interface";
-export type { StatsInterface } from "./stats.interface";
+export * from "./logoType.interface";
+export * from "./pokemon.interface";
+export * from "./stats.interface";

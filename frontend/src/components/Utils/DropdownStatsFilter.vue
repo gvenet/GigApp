@@ -22,17 +22,17 @@
 
 <script setup lang="ts">
 import { onUpdated, ref, reactive, } from 'vue';
-import type { statsInterface } from '@/interfaces/stats.interface'
+import type { StatsInterface } from '@/interfaces'
 
 
 const toggle = ref(false);
 
 const props = defineProps<{
-  stats: statsInterface[],
+  stats: StatsInterface[],
 }>();
 
 const emit = defineEmits<{
-  (e: 'filter-emits', value: statsInterface[]): void,
+  (e: 'filter-emits', value: StatsInterface[]): void,
 }>();
 
 onUpdated(() => emit('filter-emits', props.stats));

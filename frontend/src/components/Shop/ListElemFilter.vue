@@ -11,7 +11,6 @@
 
 <script setup lang="ts">
 import { onUpdated, inject } from 'vue';
-import type { LogoTypeInterface } from '@/interfaces/logoType.interface'
 import { pokemonTypesKeys } from '@/provideKeys/provideKeys';
 
 const props = defineProps<{

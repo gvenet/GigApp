@@ -1,4 +1,4 @@
-import type { LogoTypeInterface } from "@/interfaces/logoType.interface";
+import type { LogoTypeInterface } from "@/interfaces";
 import type { InjectionKey } from "vue";
 
 export const pokemonTypesKeys = Symbol() as InjectionKey<{

@@ -21,8 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { onUpdated, ref, reactive, inject} from 'vue';
-import type { LogoTypeInterface } from '@/interfaces/logoType.interface'
+import { onUpdated, ref, reactive, inject } from 'vue';
 import { pokemonTypesKeys } from '@/provideKeys/provideKeys';
 
 const toggle = ref(false);

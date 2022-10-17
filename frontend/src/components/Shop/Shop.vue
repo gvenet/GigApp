@@ -3,8 +3,7 @@
       <div class="container-shop-list d-flex-center column">
          <Filters class="filter " @export-checked="defCheckedElements" @filter-emits="defStats"
             @refresh-filter="refreshFilter" v-model:searchedPokemon="state.searchedPokemon"
-            :checkedElements="state.checkedElements"
-            :stats="state.stats" />
+            :checkedElements="state.checkedElements" :stats="state.stats" />
          <div class="shop-list d-flex">
             <template v-for="pokemon of pokemons" :key="pokemon.id">
                <div class="flex-fill" v-if="filters(pokemon)">
@@ -18,17 +17,16 @@
 </template>
 
 <script setup lang="ts">
-import { readonly, provide, reactive,} from 'vue';
-import type { PokemonInterface } from "@/interfaces/pokemon.interface";
+import { readonly, provide, reactive, } from 'vue';
+import type { PokemonInterface, StatsInterface } from "@/interfaces";
 import ShopProduct from "./ShopProduct.vue";
 import logoTypesImport from "@/data/logoTypes"
 import elemTypesImport from "@/data/elemTypes"
 import Filters from "./Filters.vue"
-import type { statsInterface } from '@/interfaces/stats.interface';
 import { pokemonTypesKeys } from '@/provideKeys/provideKeys';
 
 const state = reactive<{
-   stats: statsInterface[],
+   stats: StatsInterface[],
    searchedPokemon: string,
    checkedElements: string[],
 }>({
@@ -59,7 +57,7 @@ function defCheckedElements(value: string[]) {
    state.checkedElements = value;
 }
 
-function defStats(value: statsInterface[]) {
+function defStats(value: StatsInterface[]) {
    state.stats = value;
 }
 
