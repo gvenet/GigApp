@@ -3,28 +3,29 @@
 		<input class="elem-filter" type="checkbox" :id=elemType :value=elemType v-model="checkedElements">
 		<label :for=elemType>
 			<div class=" img-elem-filter-container d-flex-center">
-				<img class="img-elem-filter" :src="logoType[elemType as keyof typeof logoType]" alt="">
+				<img class="img-elem-filter" :src="logoTypes[elemType as keyof typeof logoTypes]" alt="">
 			</div>
 		</label>
 	</template>
 </template>
 
 <script setup lang="ts">
-import { onUpdated } from 'vue';
-import type { LogoTypeInterface } from '@/interfaces/logoType.interface'
+import { onUpdated, inject } from 'vue';
+import { pokemonTypesKeys } from '@/provideKeys/provideKeys';
 
 const props = defineProps<{
-	logoType: LogoTypeInterface,
 	checkedElements: string[],
 }>();
-
-const elemTypes = ["Bug", "Dragon", "Electric", "Fairy", "Fighting", "Fire", "Flying", "Ghost", "Grass", "Ground", "Ice", "Normal", "Poison", "Psychic", "Rock", "Steel", "Water"];
 
 const emit = defineEmits<{
 	(e: 'export-checked', value: string[]): void,
 }>();
 
-onUpdated(() => emit('export-checked', props.checkedElements))
+const { logoTypes, elemTypes } = inject(pokemonTypesKeys)!;
+
+
+
+onUpdated(() => emit('export-checked', props.checkedElements));
 
 </script>
 

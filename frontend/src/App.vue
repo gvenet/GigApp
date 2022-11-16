@@ -11,11 +11,10 @@
 <script setup lang="ts">
 import TheHeader from "./components/Header.vue";
 import TheFooter from "./components/Footer.vue";
-import Cart from "./components/Cart/Cart.vue";
 import Shop from "./components/Shop/Shop.vue";
 import { reactive } from "vue";
-import type { PokemonInterface } from "./interfaces/pokemon.interface";
-import pokemonsData from "./data/pokemons.json"
+import type { PokemonInterface } from "./interfaces";
+import pokemonsData from "./data/pokemons"
 
 
 

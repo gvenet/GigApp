@@ -17,12 +17,12 @@
       <div class="">
          <div class="d-flex-center justify-end mb-20">
             <div class="d-flex-center">
-               <template v-for="typ in pokemon.type">
-                  <img class="element-logo ml-10" :src="logos[typ as keyof typeof logos]" alt="">
+               <template v-for="logoType of pokemon.type">
+                  <img class="element-logo ml-10" :src="logoTypes[logoType as keyof typeof logoTypes]" alt="">
                </template>
             </div>
          </div>
-         <div class="pokemon-img-container d-flex-center" @click="togglePopup()">
+         <div class="pokemon-img-container d-flex-center" @click="popupTrigger=!popupTrigger">
             <img class="pokemon-img" :src="pokemon.image.thumbnail">
             <Popup v-if="popupTrigger" :fullImg="pokemon.image.hires" />
          </div>
@@ -32,18 +32,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from "vue";
+import { ref, inject} from "vue";
 import ProductElement from "./ProductElement.vue";
-import type { PokemonInterface } from "../../interfaces/pokemon.interface";
+import type { PokemonInterface } from "@/interfaces";
 import Popup from "../Utils/Popup.vue";
+import { pokemonTypesKeys } from "@/provideKeys/provideKeys";
 
-defineProps<{ pokemon: PokemonInterface, logos: any }>()
+defineProps<{
+   pokemon: PokemonInterface,
+}>()
 
 const popupTrigger = ref(false);
 
-function togglePopup() {
-   popupTrigger.value = !popupTrigger.value;
-}
+const { logoTypes } = inject(pokemonTypesKeys)!;
 
 </script>
 

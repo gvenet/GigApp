@@ -1,4 +1,4 @@
-export interface statsInterface {
+export interface StatsInterface {
   isChecked: boolean,
   name: string,
   value: number,

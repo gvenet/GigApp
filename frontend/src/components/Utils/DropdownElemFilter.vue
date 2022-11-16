@@ -7,11 +7,11 @@
 		</div>
 		<div :class="{'dropdown-content-hide': !toggle , 'dropdown-content-display': toggle}">
 			<div class="d-flex-center flex-wrap">
-				<template v-for="(elemType,i) in elemTypes" :key="i">
+				<template v-for="elemType in elemTypes">
 					<input class="elem-filter" type="checkbox" :id=elemType :value=elemType v-model="checkedElements">
 					<label :for=elemType>
 						<div class="img-elem-filter-container d-flex-center">
-							<img class="img-elem-filter" :src="logoType[elemType as keyof typeof logoType]" alt="">
+							<img class="img-elem-filter" :src="logoTypes[elemType as keyof typeof logoTypes]" alt="">
 						</div>
 					</label>
 				</template>
@@ -21,17 +21,16 @@
 </template>
 
 <script setup lang="ts">
-import { onUpdated, ref, reactive, } from 'vue';
-import type { LogoTypeInterface } from '@/interfaces/logoType.interface'
+import { onUpdated, ref, reactive, inject } from 'vue';
+import { pokemonTypesKeys } from '@/provideKeys/provideKeys';
 
 const toggle = ref(false);
 
 const props = defineProps<{
-	logoType: LogoTypeInterface,
 	checkedElements: string[],
 }>();
 
-const elemTypes = ["Bug", "Dragon", "Electric", "Fairy", "Fighting", "Fire", "Flying", "Ghost", "Grass", "Ground", "Ice", "Normal", "Poison", "Psychic", "Rock", "Steel", "Water"];
+const { logoTypes, elemTypes } = inject(pokemonTypesKeys)!;
 
 const emit = defineEmits<{
 	(e: 'export-checked', value: string[]): void,

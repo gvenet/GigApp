@@ -4,20 +4,19 @@
          <div class="search-filter d-flex-center justify-start ml-10">
             <h5 class="material-icons">search</h5>
             <input class="input-search-filter ml-10" type="text" placeholder="Search" maxlength="6"
-               v-model="searchedPokemon">
+               :value="searchedPokemon"
+               @input="$emit('update:searchedPokemon', ($event.target as HTMLInputElement).value)">
          </div>
       </div>
       <div class="stats-filter-container d-flex-center flex-fill">
-         <DropdownStatsFilter class="ml-10 mr-10" @filter-emits="emit('filter-emits', $event)" />
+         <DropdownStatsFilter class="ml-10 mr-10" @filter-emits="emit('filter-emits', $event)" :stats="props.stats" />
       </div>
       <div class="elem-filter-container d-flex-center flex-fill">
          <template v-if="windowSize > 950">
-            <ListElemFilter @export-checked="emit('export-checked', $event)" :logoType="props.logoType"
-               :checkedElements="checkedElements" />
+            <ListElemFilter @export-checked="emit('export-checked', $event)" :checkedElements="checkedElements" />
          </template>
          <template v-else>
-            <DropdownElemFilter @export-checked="emit('export-checked', $event)" :logoType="props.logoType"
-               :checkedElements="checkedElements" />
+            <DropdownElemFilter @export-checked="emit('export-checked', $event)" :checkedElements="checkedElements" />
          </template>
       </div>
       <div class="reset-filter d-flex-center mr-10 pl-10" @click="emit('refresh-filter')">
@@ -27,36 +26,34 @@
 </template>
 
 <script setup lang="ts">
-import { onUpdated, onMounted, onUnmounted, ref, type Ref } from 'vue';
-import type { LogoTypeInterface } from '../../interfaces/logoType.interface'
-import type { statsInterface } from '@/interfaces/stats.interface'
+import { onMounted, onUnmounted, ref } from 'vue';
+import type { StatsInterface } from '@/interfaces'
 import DropdownStatsFilter from '../Utils/DropdownStatsFilter.vue'
 import DropdownElemFilter from '../Utils/DropdownElemFilter.vue'
 import ListElemFilter from './ListElemFilter.vue'
 
 const windowSize = ref(window.innerWidth)
+
 onMounted(() => {
    window.addEventListener('resize', () => { windowSize.value = window.innerWidth })
-})
+});
+
 onUnmounted(() => {
    window.removeEventListener('resize', () => { windowSize.value = window.innerWidth })
-})
+});
 
 const props = defineProps<{
-   logoType: LogoTypeInterface,
    searchedPokemon: string,
    checkedElements: string[],
+   stats: StatsInterface[],
 }>();
 
 
 const emit = defineEmits<{
    (e: 'export-checked', value: string[]): void,
-   (e: 'searchedPokemon', value: string): void,
-   (e: 'filter-emits', value: statsInterface[]): void,
+   (e: 'filter-emits', value: StatsInterface[]): void,
    (e: 'refresh-filter'): void,
 }>();
-
-onUpdated(() => emit('searchedPokemon', props.searchedPokemon));
 
 </script>
 
